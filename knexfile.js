@@ -2,14 +2,19 @@ const path = require("path");
 
 if (process.env.USER) require("dotenv").config();
 
-const {
-  DATABASE_URL = "postgresql://postgres@localhost/postgres",
-} = process.env;
+const { DATABASE_URL = "postgresql://postgres@localhost/postgres" } =
+  process.env;
 
 module.exports = {
   development: {
     client: "postgresql",
-    connection: DATABASE_URL,
+    // TODO credentials
+    connection: {
+      database: "db_test",
+      user: "username_test",
+      password: "password_test",
+      // TODO credentials
+    },
     pool: { min: 0, max: 5 },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
