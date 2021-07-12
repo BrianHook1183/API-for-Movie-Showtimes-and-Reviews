@@ -11,7 +11,7 @@ async function movieIdExists(req, res, next) {
   return next({ status: 404, message: "Movie cannot be found." });
 }
 
-async function list(req, res, next) {
+async function list(req, res) {
   if (req.query.is_showing) {
     res.send({ data: await service.inTheatersNow() });
   } else {
@@ -19,16 +19,16 @@ async function list(req, res, next) {
   }
 }
 
-async function read(req, res, next) {
+async function read(req, res) {
   res.send({ data: res.locals.movie });
 }
 
-async function listTheatersForMovie(req, res, next) {
+async function listTheatersForMovie(req, res) {
   const data = await service.listTheatersForMovie(res.locals.movie.movie_id);
   res.send({ data });
 }
 
-async function listReviews(req, res, next) {
+async function listReviews(req, res) {
   const data = await service.listReviews(res.locals.movie.movie_id);
   res.send({ data });
 }

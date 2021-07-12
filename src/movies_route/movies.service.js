@@ -14,10 +14,11 @@ function list() {
 }
 
 function inTheatersNow() {
-  return knex("movies")
-    .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
-    .select("movies.*")
-    .where({ "movies_theaters.is_showing": true });
+  return knex("movies as m")
+    .join("movies_theaters as mt", "m.movie_id", "mt.movie_id")
+    .select("m.*")
+    .where({ "mt.is_showing": true })
+    .groupBy("m.movie_id");
 }
 
 function read(movieId) {
